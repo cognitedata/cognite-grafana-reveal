@@ -21,7 +21,7 @@ export class CDFConfigCtrl {
       appModel.jsonData = {};
     }
 
-    console.log('ExampleConfigCtrl', this, $scope, $injector);
+    console.log('ExampleConfigCtrl', this);
   }
 
   postUpdate() {
