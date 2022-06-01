@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react';
 import { PanelProps } from '@grafana/data';
-import { BackendSrv, getBackendSrv } from '@grafana/runtime';
 import { CogniteClient } from '@cognite/sdk';
 import { Cognite3DViewer } from '@cognite/reveal';
 import _ from 'lodash';
 import { D3ModelOptions } from './types';
-import { D3ModelNodesApiClient } from './providers/D3ModelNodesApiClient';
-import { D3ModelDataProvider } from './providers/D3ModelDataProvider';
-import { D3ModelMetaDataProvider } from './providers/D3ModelMetaDataProvider';
 
 type Props = PanelProps<D3ModelOptions>;
 
@@ -17,11 +13,6 @@ const loginManager = {
   },
 };
 
-const customDataSource = {
-  getNodesApiClient: () => new D3ModelNodesApiClient(),
-  getModelMetadataProvider: () => new D3ModelMetaDataProvider(),
-  getModelDataProvider: () => new D3ModelDataProvider(),
-};
 const domElement = document.getElementById('canvas-wrapper');
 const start = async (modelId, revisionId, client) => {
   const viewer = new Cognite3DViewer({ domElement, sdk: client });

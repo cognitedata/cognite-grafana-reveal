@@ -1,16 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
-  "type": "app",
-  "name": "Cognite Data Fusion app",
-  "id": "cognite-app",
-
+  "type": "panel",
+  "name": "cognite-3d-model",
+  "id": "cognite-3d-model",
   "info": {
-    "description": "Cognite Data Fusion Grafana App Plugin",
+    "description": "cognite 3d models",
     "author": {
       "name": "Cognite",
       "url": "https://cognite.com"
     },
-    "keywords": ["cognite", "App", "3D Model"],
+    "keywords": [
+      "3D Models",
+      "cognite",
+      "reveal"
+    ],
     "logos": {
       "small": "img/CDF_logo.svg",
       "large": "img/CDF_logo.svg"
@@ -29,25 +32,8 @@
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
-
-  "includes": [
-    {
-      "type": "datasource",
-      "name": "CDF datasource"
-    },
-    {
-      "type": "panel",
-      "name": "CDF 3D Model"
-    },
-    {
-      "type": "panel",
-      "name": "Vis Node Graph"
-    }
-  ],
-
   "dependencies": {
     "grafanaDependency": ">=7.0.0",
-    "grafanaVersion": "7.0.0",
     "plugins": []
   }
 }
