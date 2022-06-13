@@ -24,11 +24,11 @@ export const D3ModelPanel: React.FC<Props> = (props) => {
     const t = await client.authenticate();
     // console.log(t);
     const viewer = new Cognite3DViewer({ domElement, sdk: client });
-    /* const model = await viewer.addModel({
+    const model = await viewer.addModel({
       modelId,
       revisionId,
     });
-    viewer.loadCameraFromModel(model); */
+    viewer.loadCameraFromModel(model);
   };
   useEffect(() => {
     const projects = flatter.filter('project').value();
