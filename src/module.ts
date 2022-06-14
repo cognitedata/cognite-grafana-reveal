@@ -1,6 +1,6 @@
 import { PanelPlugin } from '@grafana/data';
 import { D3ModelOptions } from './types';
-import { D3ModelPanel } from './D3ModelPanel';
+import D3ModelPanel from './panels/D3ModelPanel0';
 
 export const plugin = new PanelPlugin<D3ModelOptions>(D3ModelPanel).setPanelOptions((builder) => {
   return builder

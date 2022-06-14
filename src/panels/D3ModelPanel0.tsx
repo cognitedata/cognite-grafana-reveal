@@ -3,27 +3,24 @@ import { PanelProps } from '@grafana/data';
 import { CogniteClient } from '@cognite/sdk';
 import { Cognite3DViewer } from '@cognite/reveal';
 import _ from 'lodash';
-import { D3ModelOptions } from './types';
+import { D3ModelOptions } from '../types';
 
 type Props = PanelProps<D3ModelOptions>;
 
 const loginManager = {
   getToken: () => {
-    return Promise.resolve('grafan');
+    return Promise.resolve('');
   },
 };
 
-export const D3ModelPanel: React.FC<Props> = (props) => {
-  // const { options, data, width, height } = props;
-  const { data } = props;
+const D3ModelPanel: React.FC<Props> = (props) => {
+  const { options, data, width, height } = props;
   const { series } = data;
+  const style = { width, height };
   const flatter = _.chain(series).map('source').flatMapDeep();
 
   const domElement = document.getElementById('canvas-wrapper');
-  const start = async (modelId, revisionId, client) => {
-    const t = await client.authenticate();
-    // console.log(t);
-    const viewer = new Cognite3DViewer({ domElement, sdk: client });
+  const start = async (modelId, revisionId, viewer) => {
     const model = await viewer.addModel({
       modelId,
       revisionId,
@@ -41,16 +38,19 @@ export const D3ModelPanel: React.FC<Props> = (props) => {
       const { revisionId, modelId } = _.last(goodIds);
       const client = new CogniteClient({
         project,
-        appId: 'grafan',
-        baseUrl: `http://localhost:3000${url}/cdf-cc-oauth`,
+        appId: 'grafana3DModel',
+        baseUrl: `http://localhost:3000/api/${url}/cdf-cc-oauth`,
         getToken: loginManager.getToken,
       });
-      start(modelId, revisionId, client);
+      const viewer = new Cognite3DViewer({ domElement, sdk: client });
+      start(modelId, revisionId, viewer);
     }
   }, [series]);
   return (
     <div>
-      <div className="canvas-wrapper" />
+      <div className="canvas-wrapper" id="canvas-wrapper" style={style} />
     </div>
   );
 };
+
+export default D3ModelPanel;
