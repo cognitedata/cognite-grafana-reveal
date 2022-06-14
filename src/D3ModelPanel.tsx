@@ -27,12 +27,14 @@ const creatClient = () => {
   return customDataSource;
 };
 
+const getAuth = (oauthClientCredentials, oauthPassThru) => oauthClientCredentials ? 'cdf-cc-oauth' : oauthPassThru ? 'cdf-oauth' : 'cdf-api-key'
+
 export const D3ModelPanel: React.FC<Props> = (props) => {
   const { options, width, height } = props;
   const config = window.grafanaBootData.settings.appUrl;
   const datasource = creatClient();
   // console.log(datasource.connector.oauthClientCredentials);
-  const baseUrl = `${config.slice(0, config.length - 1)}${datasource.url}/cdf-cc-oauth`;
+  const baseUrl = `${config.slice(0, config.length - 1)}${datasource.url}/${getAuth(datasource.connector.oauthClientCredentials, datasource.connector.oauthPassThru)}`;
   const client = cogniteClient(datasource.project, baseUrl);
 
   const models3D = async (client) => {
