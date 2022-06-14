@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import D3Viewer from '../components/D3Viewer';
+import D3Viewer from '../components/D3ViewerCustomDatasource';
 
 // @ts-ignore
 const D3ModelPanel = (props) => {

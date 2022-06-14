@@ -39,8 +39,9 @@ const D3ModelPanel: React.FC<Props> = (props) => {
       const client = new CogniteClient({
         project,
         appId: 'grafana3DModel',
-        baseUrl: `http://localhost:3000/api/${url}/cdf-cc-oauth`,
+        baseUrl: `http://localhost:3000${url}/cdf-cc-oauth`,
         getToken: loginManager.getToken,
+        apiKeyMode: true,
       });
       const viewer = new Cognite3DViewer({ domElement, sdk: client });
       start(modelId, revisionId, viewer);
