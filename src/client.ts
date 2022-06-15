@@ -5,6 +5,7 @@ const loginManager = {
     return Promise.resolve('');
   },
 };
+
 export default (project, baseUrl) =>
   new CogniteClient({
     project,
