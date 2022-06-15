@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "panel",
-  "name": "cognite-3d-model",
+  "name": "Cognite 3d Models",
   "id": "cognite-3d-model",
   "info": {
-    "description": "cognite 3d models",
+    "description": "cognite 3D model support",
     "author": {
       "name": "Cognite",
       "url": "https://cognite.com"

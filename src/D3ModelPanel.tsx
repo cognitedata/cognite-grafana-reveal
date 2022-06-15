@@ -16,11 +16,6 @@ export const D3ModelPanel: React.FC<Props> = (props) => {
     options.list3DModels = mapModelToDropdown(D3Models.items);
     return options;
   };
-  const elem = React.createElement(
-    'div',
-    { style: { width, height }, id: 'canvas-wrapper', className: 'canvas-wrapper' },
-    'Loading'
-  );
   useEffect(() => {
     const datasource = getDatasource(uid);
     const baseUrl = `${config.slice(0, config.length - 1)}${datasource.url}/${getAuth(
@@ -35,5 +30,9 @@ export const D3ModelPanel: React.FC<Props> = (props) => {
       startView(client, options.selected3DModel, domElement);
     }
   }, [data.request, selected3DModel]);
-  return <div>{elem}</div>;
+  return (
+    <div>
+      <div className="canvas-wrapper" id="canvas-wrapper" style={{ width, height }} />
+    </div>
+  );
 };
