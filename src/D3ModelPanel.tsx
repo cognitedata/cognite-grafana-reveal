@@ -1,57 +1,40 @@
 import React, { useEffect } from 'react';
 import { PanelProps } from '@grafana/data';
-import cogniteClient from './client';
+import { cogniteClient } from './client';
 import { D3ModelOptions } from './types';
-import {
-  getAuth,
-  getDatasource,
-  startView,
-  mapModelToDropdown,
-  fitCameraToAssetId,
-  map3DAssetMappingsToAssetCall,
-} from './utils';
+import { startView, fitCameraToAssetId } from './utils';
 
 type Props = PanelProps<D3ModelOptions>;
 
-export const D3ModelPanel: React.FC<Props> = (props) => {
-  const { options, width, height, data } = props;
+export const D3ModelPanel: React.FC<Props> = ({ options, width, height, data }) => {
   const { selected3DModel, withAssetSupport, zoomToAssetId } = options;
-  const { uid } = data.request.targets[0].datasource;
-  const config = window.grafanaBootData.settings.appUrl;
-  const get3DModels = async (client) => {
-    const D3Models = await client.models3D.list({ published: true });
-    options.list3DModels = mapModelToDropdown(D3Models.items);
-    return options;
-  };
-  const getAssets = async (client, revisionID) => {
-    const mappings3D = await client.assetMappings3D.list(selected3DModel, revisionID);
-    const assets = await client.assets.retrieve(map3DAssetMappingsToAssetCall(mappings3D.items));
-    options.listAssets = mapModelToDropdown(assets);
-    return options;
-  };
+  const domElement = document.getElementById('canvas-wrapper');
   // @ts-ignore
   useEffect(async () => {
-    const datasource = getDatasource(uid);
-    const baseUrl = `${config.slice(0, config.length - 1)}${datasource.url}/${getAuth(
-      datasource.connector.oauthClientCredentials,
-      datasource.connector.oauthPassThru
-    )}`;
-    const client = cogniteClient(datasource.project, baseUrl);
-    get3DModels(client);
-    if (selected3DModel) {
-      const domElement = document.getElementById('canvas-wrapper');
-      domElement.innerHTML = null;
-      const id = await startView(client, selected3DModel, domElement, zoomToAssetId);
-      if (withAssetSupport) {
-        getAssets(client, id);
+    const client = cogniteClient(data.series);
+    if (domElement) {
+      if (selected3DModel) {
+        domElement.innerHTML = null;
+        const { viewer } = await startView(client, domElement);
+        const model = await viewer.addModel(selected3DModel);
+        viewer.loadCameraFromModel(model);
+        viewer.on('click', async (event) => {
+          const intersection = await viewer.getIntersectionFromPixel(event.offsetX, event.offsetY);
+          if (intersection) {
+            console.log(intersection);
+          }
+        });
+        if (zoomToAssetId) {
+          fitCameraToAssetId(zoomToAssetId, model, viewer, client);
+        }
       }
     }
-  }, [data.request, selected3DModel, withAssetSupport, zoomToAssetId]);
+  }, [data, selected3DModel, zoomToAssetId, withAssetSupport, domElement]);
   return (
     <div>
-      <div className="canvas-wrapper" id="canvas-wrapper" style={{ width, height }} />
+      <div className="canvas-wrapper" id="canvas-wrapper" style={{ width, height }}>
+        Select a model to visualize
+      </div>
     </div>
   );
 };
-
-// const setOverlay = porps => {}

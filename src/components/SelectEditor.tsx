@@ -1,18 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { Select } from '@grafana/ui';
-import _ from 'lodash';
+import { cogniteClient } from '../client';
+import { get3DModelList, getRevisionId } from './helpers';
 
-export const SelectEditor: React.FC<any> = ({
-  value,
-  onChange,
-  context: {
-    options: { list3DModels },
-  },
-}) => {
-  const [options, setOptions] = useState(list3DModels);
+export const SelectEditor: React.FC<any> = ({ value, onChange, context: { data } }) => {
+  const [options, setOptions] = useState([]);
+  const client = cogniteClient(data);
   useEffect(() => {
-    setOptions(list3DModels);
-  }, [list3DModels]);
+    if (client) {
+      get3DModelList(client)
+        .then(setOptions)
+        .catch((error) => {
+          if (error) setOptions([]);
+        });
+    }
+  }, [data]);
 
-  return <Select options={options} value={value} onChange={(selectableValue) => onChange(selectableValue.value)} />;
+  return (
+    <Select
+      options={options}
+      value={value?.modelId}
+      onChange={(selectableValue) => {
+        getRevisionId(client, selectableValue.id)
+          .then((revisionId) => {
+            onChange({ modelId: selectableValue.id, revisionId });
+          })
+          .catch((e) => {
+            if (e) console.log('error change', e);
+          });
+      }}
+    />
+  );
 };
