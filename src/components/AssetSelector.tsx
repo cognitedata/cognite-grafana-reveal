@@ -10,6 +10,7 @@ export const AssetSelector: React.FC<any> = ({
     data,
     options: { selected3DModel },
   },
+  ...rest
 }) => {
   const [options, setOptions] = useState([]);
   const client = cogniteClient(data);
