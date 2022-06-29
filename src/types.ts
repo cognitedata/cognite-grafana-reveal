@@ -1,4 +1,6 @@
 export interface D3ModelOptions {
+  selectedDatasource: any;
+  selectedProject: any;
   selected3DModel: any;
   list3DModels?: any[];
   withAssetSupport: boolean;
