@@ -12,7 +12,7 @@ export const D3ModelPanel: React.FC<Props> = ({
   width,
   height,
 }) => {
-  const ref = useRef();
+  const ref = useRef<HTMLInputElement>(null);
   const [viewer, setViewer] = useState(null);
   const [model, setModel] = useState(null);
   const client = useMemo(() => {
@@ -40,8 +40,7 @@ export const D3ModelPanel: React.FC<Props> = ({
   useEffect(() => {
     if (selectedProject && client) {
       if (selected3DModel) {
-        // @ts-ignore
-        ref.current?.innerHTML = null;
+        ref.current.innerHTML = null;
         const { viewer } = startView(client, ref.current);
         setViewer(viewer);
         display(client, viewer);

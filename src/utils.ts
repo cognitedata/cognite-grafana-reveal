@@ -1,5 +1,5 @@
 import { AssetNodeCollection, Cognite3DViewer, THREE } from '@cognite/reveal';
-import { getDataSourceSrv } from '@grafana/runtime';
+import { DataSourceSrv, getDataSourceSrv } from '@grafana/runtime';
 import _ from 'lodash';
 
 const { appUrl } = window.grafanaBootData.settings;
@@ -8,8 +8,7 @@ const getAuth = (oauthClientCredentials, oauthPassThru) =>
   oauthClientCredentials ? 'cdf-cc-oauth' : oauthPassThru ? 'cdf-oauth' : 'cdf-api-key';
 
 export const getAllProjectSettings = () => {
-  // @ts-ignore
-  const { defaultName, datasources } = getDataSourceSrv();
+  const { defaultName, datasources }: DataSourceSrv & any = getDataSourceSrv();
   const settings = _.filter(datasources, ({ id }) => id > 0);
   if (settings.length) {
     const datasource = _.find(settings, { name: defaultName });
