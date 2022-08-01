@@ -10,11 +10,3 @@ export interface D3ModelOptions {
     [x: string]: any;
   };
 }
-
-export enum D3ModelOptionsType {
-  model = 'selected3DModel',
-  models = 'list3DModels',
-  withAssets = 'withAssetSupport',
-  zoom = 'zoomToAssetId',
-  assets = 'listAssets',
-}
