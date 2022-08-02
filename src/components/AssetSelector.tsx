@@ -24,8 +24,6 @@ export const AssetSelector: React.FC<any> = ({
     if (selected3DModel && client) {
       getAssetMappings3D(client, selected3DModel)
         .then((options) => {
-          const variables = getTemplateSrv().getVariables();
-          console.log('variables: ', variables[0], '\noptions: ', options, '\nvalue: ', value);
           return setOptions(options);
         })
         .catch((error) => {
