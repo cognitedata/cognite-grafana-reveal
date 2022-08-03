@@ -1,7 +1,7 @@
 {
-  "name": "@cognite/cognite-grafana-app",
-  "version": "1.0.0",
-  "description": "Cognite Data Fusion App Plugin",
+  "name": "@cognite/cognite-grafana-reveal",
+  "version": "0.0.1",
+  "description": "Cognite Data Fusion 3D viewer panel",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",
