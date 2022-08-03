@@ -8,7 +8,7 @@ export const getProjcets = (baseUrl) => {
     appId,
     baseUrl,
     getToken: () => Promise.resolve(''),
-    apiKeyMode: true,
+    noAuthMode: true,
   });
   const b = baseUrl.split('/');
   return client.get(b[b.length - 1].match('cdf-api-key') ? '/login/status' : '/api/v1/token/inspect');
@@ -20,6 +20,6 @@ export const cogniteClient = (project, baseUrl) => {
     appId,
     baseUrl,
     getToken: () => Promise.resolve(''),
-    apiKeyMode: true,
+    noAuthMode: true,
   });
 };

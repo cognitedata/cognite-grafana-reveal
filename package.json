@@ -49,7 +49,8 @@
   },
   "dependencies": {
     "@cognite/reveal": "^3.0.2",
-    "@cognite/sdk": "^7.7.0",
+    "@cognite/sdk": "^7.8.0",
+    "@cognite/sdk-core": "^4.5.1",
     "@grafana/data": "^8.5.0",
     "@grafana/runtime": "^8.5.0",
     "@grafana/toolkit": "^8.5.0",
