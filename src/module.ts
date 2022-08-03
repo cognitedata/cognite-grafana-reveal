@@ -3,18 +3,15 @@ import _ from 'lodash';
 import { D3ModelOptions } from './types';
 import { D3ModelPanel } from './D3ModelPanel';
 import { AssetSelector, Select3DModelEditor, SelectProjectEditor, SelectDatasourceEditor } from './components';
-import { getAllProjectSettings } from './utils';
 import { cogniteClient, getProjcets } from './client';
 
 export const plugin = new PanelPlugin<D3ModelOptions>(D3ModelPanel).setPanelOptions((builder) => {
-  const { datasources, datasource } = getAllProjectSettings();
   builder
     .addCustomEditor({
       id: 'datasources',
       path: 'selectedDatasource',
       name: 'Datasource Project name',
       editor: SelectDatasourceEditor,
-      settings: { datasource, datasources },
     })
     .addCustomEditor({
       id: 'projects',

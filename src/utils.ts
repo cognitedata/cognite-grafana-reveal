@@ -7,13 +7,12 @@ const getAuth = (oauthClientCredentials, oauthPassThru) =>
   // eslint-disable-next-line no-nested-ternary
   oauthClientCredentials ? 'cdf-cc-oauth' : oauthPassThru ? 'cdf-oauth' : 'cdf-api-key';
 
-export const getAllProjectSettings = () => {
-  const { defaultName, datasources }: DataSourceSrv & any = getDataSourceSrv();
+export const getAllProjectSettings = ({ defaultName, datasources }) => {
   const settings = _.filter(datasources, ({ id }) => id > 0);
   if (settings.length) {
     const datasource = _.find(settings, { name: defaultName });
     return {
-      datasources: mapDatasourceToDropdown(settings),
+      options: mapDatasourceToDropdown(settings),
       datasource: mapDasaourceToSelected(datasource ?? settings[0]),
     };
   }
