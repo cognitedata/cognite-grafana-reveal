@@ -1,10 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
   "type": "panel",
-  "name": "Cognite 3d Models",
+  "name": "Cognite 3D Panel",
   "id": "cognite-3d-model",
   "info": {
-    "description": "cognite 3D model support",
+    "description": "Cognite 3D Viewer",
     "author": {
       "name": "Cognite",
       "url": "https://cognite.com"
@@ -21,11 +21,11 @@
     "links": [
       {
         "name": "Project site",
-        "url": "https://github.com/cognitedata/cognite-grafana-datasource"
+        "url": "https://github.com/cognitedata/cognite-grafana-reveal"
       },
       {
         "name": "Apache License",
-        "url": "https://github.com/cognitedata/cognite-grafana-datasource/blob/master/LICENSE"
+        "url": "https://github.com/cognitedata/cognite-grafana-reveal/blob/master/LICENSE"
       }
     ],
     "screenshots": [],
