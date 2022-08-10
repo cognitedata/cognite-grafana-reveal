@@ -41,9 +41,6 @@ export const D3ModelPanel: React.FC<Props> = (props) => {
     viewer.loadCameraFromModel(model);
     viewer.on('click', async (event) => {
       const intersection = await viewer.getIntersectionFromPixel(event.offsetX, event.offsetY);
-      if (intersection) {
-        console.log('intersection', intersection);
-      }
     });
     if (zoomToAssetId) {
       zoomInTo(zoomToAssetId, model, viewer, client);
