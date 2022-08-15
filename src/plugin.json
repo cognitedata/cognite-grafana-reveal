@@ -33,6 +33,12 @@
   },
   "dependencies": {
     "grafanaDependency": ">=8.0.0",
-    "plugins": ["cognitedata-datasource"]
+    "plugins": [
+      {
+        "id":"cognitedata-datasource",
+        "name": "Cognite Data Fusion",
+        "type":"datasource",
+        "version": ">=2.50"
+    }]
   }
 }
