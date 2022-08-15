@@ -37,8 +37,7 @@ export const Select3DModelEditor: React.FC<any> = ({
           .then((revisionId) => {
             onChange({ modelId: selectableValue.id, revisionId });
           })
-          .catch((e) => {
-          });
+          .catch((e) => {});
       }}
     />
   );
