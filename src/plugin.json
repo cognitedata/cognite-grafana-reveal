@@ -27,7 +27,12 @@
         "url": "https://github.com/cognitedata/cognite-grafana-reveal/blob/master/LICENSE"
       }
     ],
-    "screenshots": [],
+    "screenshots": [
+      {
+        "name":"Sample 3D Model",
+        "path":"img/cognite-grafana-reveal.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
