@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "Cognite 3D Panel",
-  "id": "cognitedata-3d-model",
+  "id": "cognitedata-3d-panel",
   "info": {
     "description": "Cognite 3D Viewer",
     "author": {
