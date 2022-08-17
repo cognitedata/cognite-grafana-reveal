@@ -43,7 +43,7 @@
         "id":"cognitedata-datasource",
         "name": "Cognite Data Fusion",
         "type":"datasource",
-        "version": ">=2.50"
+        "version": ">=2.5.0"
     }]
   }
 }
